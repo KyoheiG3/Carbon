@@ -4,6 +4,8 @@ import Carbon
 
 final class HomeViewController: UIViewController {
     enum Destination {
+        case normalAlphabet
+        case alphabet
         case hello
         case pangram
         case kyoto
@@ -29,6 +31,14 @@ final class HomeViewController: UIViewController {
         renderer.render {
             Header("EXAMPLES")
                 .identified(by: \.title)
+
+            HomeItem(title: "🔡 Normal Alphabet") { [weak self] in
+                self?.push(.normalAlphabet)
+            }
+
+            HomeItem(title: "🔡 Alphabet") { [weak self] in
+                self?.push(.alphabet)
+            }
 
             HomeItem(title: "👋 Hello") { [weak self] in
                 self?.push(.hello)
@@ -64,6 +74,12 @@ final class HomeViewController: UIViewController {
         let controller: UIViewController
 
         switch destination {
+        case .normalAlphabet:
+            controller = NormalAlphabetViewController()
+
+        case .alphabet:
+            controller = AlphabetViewController()
+
         case .hello:
             controller = HelloViewController()
 
